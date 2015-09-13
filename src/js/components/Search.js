@@ -72,43 +72,61 @@ var Search = React.createClass({
     var listItems = [];
     var items =this.state.results;
     // console.log(items);
-    for (var i = 0; i < items.length; i++) {
-      listItems.push(
-        <ListItem 
-          key={items[i].id}
-          onClick={this.handleClick.bind(null,items[i].id)}
-          primaryText={
-            <p>
-              <span 
-                style={{
-                  fontSize: '15px'}}
+    if(items!==false && items.length>0){
+      for (var i = 0; i < items.length; i++) {
+        listItems.push(
+          <ListItem 
+            key={items[i].id}
+            onClick={this.handleClick.bind(null,items[i].id)}
+            primaryText={
+              <p>
+                <span 
+                  style={{
+                    fontSize: '15px'}}
+                  >
+                    {items[i].nombre}
+                </span>
+              </p>
+            }
+            secondaryText={
+              <p>
+                <span 
+                  style={{
+                    color: 'gray', 
+                    fontSize: '11px'
+                  }}
                 >
-                  {items[i].nombre}
-              </span>
-            </p>
-          }
-          secondaryText={
-            <p>
-              <span 
-                style={{
-                  color: 'gray', 
-                  fontSize: '11px'
-                }}
-              >
-              {items[i].cargo} · {items[i].partido} · {items[i].entidad}
-              </span>
-            </p>
-          }
-          leftAvatar={<Avatar 
-            style={{height: '45px', width: '45px'}}
-            src={items[i].image} 
-          />} 
-        />
-      );
+                {items[i].cargo} · {items[i].partido} · {items[i].entidad}
+                </span>
+              </p>
+            }
+            leftAvatar={<Avatar 
+              style={{height: '45px', width: '45px'}}
+              src={items[i].image} 
+            />} 
+          />
+        );
+      } //fin for
+    }else{
+      var msg = items===false?'Escribe un nombre':'No se encontraron resultados';
+      listItems.push(
+          <ListItem 
+            key={0}
+            primaryText={
+              <p>
+                <span 
+                  style={{
+                    fontSize: '15px'}}
+                  >
+                    {msg}
+                </span>
+              </p>
+            } 
+          />
+        );
     }
-
-    return listItems;
-  }
+      return listItems;
+    }
 });
 
 module.exports = Search;

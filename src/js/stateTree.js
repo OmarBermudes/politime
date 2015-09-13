@@ -7,7 +7,7 @@ module.exports = new Baobab({
   route: 'main',
   search: {
     query: '',
-    results: []
+    results: false
   },
   information: {
     id: 0,

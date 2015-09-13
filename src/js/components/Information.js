@@ -92,35 +92,33 @@ var Information = React.createClass({
 
   _renderActions: function() {
     var actions = [];
-
-    for (var i = 0; i < 10; i++) {
-      actions.push(
-        <div className="actions__action" key={i}>
-          <p className="actions__title">COMISIONES</p>
-          <div className="actions__information">
+    var trayectorias = this.state.info.body.info.trayectorias;
+    console.log(trayectorias);
+    for (var i = 0; i < trayectorias.length; i++) {
+          var aux= [];
+          for (var j=0; j < trayectorias[i].actions.length; j++){
+            aux.push(
+            <div className="actions__information">
             <div className="actions__date">
               <div>
-                <p>2001</p>
-                <p>2003</p>
+                <p>{trayectorias[i].actions[j].from}</p>
+                <p>{trayectorias[i].actions[j].to}</p>
               </div>
             </div>
             <Paper zDepth={2} className="actions__description">
-              <p>Diputada local en la LVI legislatura del Congreso de Yucatán. Presidenta de la Comisión de Equidad y Género. Responsable de la organización y ejecución del primer foro de equidad y género.</p>
+              <p>{trayectorias[i].actions[j].action}</p>
             </Paper>
           </div>
-          <div className="actions__information">
-            <div className="actions__date">
-              <div>
-                <p>2001</p>
-                <p>2003</p>
-              </div>
-            </div>
-            <Paper zDepth={2} className="actions__description">
-              <p>Diputada local en la LVI legislatura del Congreso de Yucatán. Presidenta de la Comisión de Equidad y Género. Responsable de la organización y ejecución del primer foro de equidad y género.</p>
-            </Paper>
+              );
+          }
+      if(trayectorias[i].actions.length>0){
+          actions.push(
+          <div className="actions__action" key={i}>
+            <p className="actions__title">{trayectorias[i].title}</p>
+            {aux}
           </div>
-        </div>
-      );
+          );
+        }    
     }
 
     return actions;
@@ -132,15 +130,78 @@ var Information = React.createClass({
 
   _renderProfile: function() {
     var infoProfile = [];
-    var profile = this.state.info.body.info.profile;
-    for (var i = 0; i < 10; i++) {
+    var profile = this.state.info.body.info.perfil;
+    console.log(profile);
+    
       infoProfile.push(
         <div className="profile__info">
-          <p className="profile__label">Nombre</p>
+          <p className="profile__label">Nombre:</p>
           <p className="profile__content">{profile.cargo} {profile.nombre} por la {profile.legislatura}</p>
         </div>
       );
-    }
+
+      infoProfile.push(
+        <div className="profile__info">
+          <p className="profile__label">Estatus:</p>
+          <p className="profile__content">{profile.estatus}</p>
+        </div>
+      );
+
+      infoProfile.push(
+        <div className="profile__info">
+          <p className="profile__label">Partido:</p>
+          <p className="profile__content">{profile.partido}</p>
+        </div>
+      );
+
+      infoProfile.push(
+        <div className="profile__info">
+          <p className="profile__label">Nacimiento:</p>
+          <p className="profile__content">{profile.fechaNacimiento}</p>
+        </div>
+      );
+
+      infoProfile.push(
+        <div className="profile__info">
+          <p className="profile__label">Principio de la elección:</p>
+          <p className="profile__content">{profile.principioDeEleccion}</p>
+        </div>
+      );
+
+      infoProfile.push(
+        <div className="profile__info">
+          <p className="profile__label">Zona:</p>
+          <p className="profile__content">{profile.zonaEntidad}</p>
+        </div>
+      );
+
+      infoProfile.push(
+        <div className="profile__info">
+          <p className="profile__label">Toma de protesta:</p>
+          <p className="profile__content">{profile.tomaDeProtesta}</p>
+        </div>
+      );
+
+      infoProfile.push(
+        <div className="profile__info">
+          <p className="profile__label">Suplente:</p>
+          <p className="profile__content">{profile.suplente}</p>
+        </div>
+      );
+
+      infoProfile.push(
+        <div className="profile__info">
+          <p className="profile__label">Último grado de estudios:</p>
+          <p className="profile__content">{profile.ultimoGradoEstudios}</p>
+        </div>
+      );
+
+      infoProfile.push(
+        <div className="profile__info">
+          <p className="profile__label">Preparación académica:</p>
+          <p className="profile__content">{profile.preparacionAcademica}</p>
+        </div>
+      );
 
     return infoProfile;
   },

@@ -1,0 +1,36 @@
+@import 'base/normalize';
+@import 'helpers/mixins';
+@import 'helpers/variables';
+@import 'components/presentation';
+@import 'components/search';
+@import 'components/information';
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+* {
+  font-family: 'Roboto', sans-serif, Arial, Helvatica;
+}
+
+html, 
+body, 
+#app,
+#app > div {
+  background: $white;
+  height: 100%;
+}
+
+a,
+p,
+ul,
+ol,
+li,
+h1,
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}

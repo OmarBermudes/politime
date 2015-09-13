@@ -1,0 +1,28 @@
+.presentation {
+  background: {
+    image: url('../images/background_main.png');
+    position: 50% 50%;
+    size: cover;
+    repeat: no-repeat;
+    color: $green;
+  }
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .presentation__img {
+    width: 50%;
+    max-width: 12em;
+  }
+  .presentation__h1 {
+    color: $white;
+    font-weight: $normal;
+    text-align: center;
+    margin: 1em;
+    font-size: 1.25em;
+  }
+  .presentation__button {
+    min-width: 250px;
+  }
+}

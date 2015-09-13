@@ -1,0 +1,19 @@
+.search {
+  background-color: $green;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .search__input {
+    display: flex;
+    flex: 0 0 auto;
+    padding: 0.25em 0.5em;
+    justify-content: space-between;
+  }
+  .search__results {
+    margin: 0.5em 0 1em;
+    align-self: center;
+    width: 90%;
+    max-width: 480px;
+    overflow-y: auto;
+  }
+}

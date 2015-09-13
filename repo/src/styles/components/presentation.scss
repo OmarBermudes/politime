@@ -1,0 +1,22 @@
+.presentation {
+  background-color: $green;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .presentation__img {
+    width: 150px;
+    height: 150px;
+  }
+  .presentation__h1 {
+    color: $white;
+    font-weight: $normal;
+    text-align: center;
+    margin: 1em;
+    font-size: 1.25em;
+  }
+  .presentation__button {
+    min-width: 250px;
+  }
+}

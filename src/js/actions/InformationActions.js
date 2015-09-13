@@ -9,8 +9,7 @@ module.exports = {
        .get('http://192.168.1.89/legisladores/legisladorinfo/'+id)
        .jsonp()
        .end(function(err,res){
-          informationCursor.set('information',res);
-          console.log(res);
+          informationCursor.set('info',res);
        });
   }
 };

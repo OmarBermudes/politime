@@ -11,77 +11,83 @@ var RaisedButton = require('material-ui').RaisedButton;
 
 var MainActions = require('../actions/MainActions');
 var InformationActions = require('../actions/InformationActions');
+var informationCursor = require('../stateTree').select('information');
 
 var Information = React.createClass({
   mixins: [mixin.branch],
 
   cursors: {
-    id: ['information', 'id']
+    id: ['information', 'id'],
+    info: ['information','info']
   },
 
   componentDidMount: function() {
     // después de que el componente se montó, lo primero que hárá es el request.
     InformationActions.getInfoLegislator();
-
   },
 
   render: function() {
-    console.log(this.state.id);
-    return (
-      <div className="information">
-        <div className="information__header">
-          <IconButton
-            onClick={this.handleClick}
-            iconClassName="material-icons"
-            iconStyle={{color: 'white'}}
-          >
-            keyboard_backspace
-          </IconButton>
-          <Avatar
-            className="information__image"
-            style={{
-              height: '90px',
-              width: '90px',
-              border: '5px solid white'
-            }}
-            src="https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg"
-          />
-          <p className="information__name">
-            Doge De Latinoamérica
-          </p>
-        </div>
-        <Tabs
-          inkBarStyle={{backgroundColor: '#ffffff'}}
-          tabItemContainerStyle={{backgroundColor: '#37db67'}}
-          contentContainerStyle={{
-            backgroundColor: '#37db67',
-            width: '100%',
-            maxWidth: '680px',
-            margin: '0 auto'
-          }}
-        >
-          <Tab label="TRAYECTORIA">
-            <div className="actions">
-              {this._renderActions()}
+      if(this.state.info){
+        var info = this.state.info.body.info;
+        return (
+          <div className="information">
+            <div className="information__header">
+              <IconButton
+                onClick={this.handleClick}
+                iconClassName="material-icons"
+                iconStyle={{color: 'white'}}
+              >
+                keyboard_backspace
+              </IconButton>
+              <Avatar
+                className="information__image"
+                style={{
+                  height: '90px',
+                  width: '90px',
+                  border: '5px solid white'
+                }}
+                src={info.perfil.imagenUrl}
+              />
+              <p className="information__name">
+                {info.perfil.nombre}
+              </p>
             </div>
-          </Tab>
+            <Tabs
+              inkBarStyle={{backgroundColor: '#ffffff'}}
+              tabItemContainerStyle={{backgroundColor: '#37db67'}}
+              contentContainerStyle={{
+                backgroundColor: '#37db67',
+                width: '100%',
+                maxWidth: '680px',
+                margin: '0 auto'
+              }}
+            >
+              <Tab label="TRAYECTORIA">
+                <div className="actions">
+                  {this._renderActions()}
+                </div>
+              </Tab>
 
-          <Tab label="PERFIL">
-            <div className="profile">
-              <Paper zDepth={2}>
-                {this._renderProfile()}
-              </Paper>
-            </div>
-          </Tab>
+              <Tab label="PERFIL">
+                <div className="profile">
+                  <Paper zDepth={2}>
+                    {this._renderProfile()}
+                  </Paper>
+                </div>
+              </Tab>
 
-          <Tab label="COMPARTIR">
-            <div className="share">
-              {this._renderShare()}
-            </div>
-          </Tab>
-        </Tabs>
-      </div>
-    );
+              <Tab label="COMPARTIR">
+                <div className="share">
+                  {this._renderShare()}
+                </div>
+              </Tab>
+            </Tabs>
+          </div>
+        );
+        
+      }else{
+        return <div></div>;
+      }
   },
 
   _renderActions: function() {
@@ -126,12 +132,12 @@ var Information = React.createClass({
 
   _renderProfile: function() {
     var infoProfile = [];
-
+    var profile = this.state.info.body.info.profile;
     for (var i = 0; i < 10; i++) {
       infoProfile.push(
         <div className="profile__info">
           <p className="profile__label">Nombre</p>
-          <p className="profile__content">Senadora Propietario: Ortega Pacheco, Ivonne Aracely por la LX Legislatura</p>
+          <p className="profile__content">{profile.cargo} {profile.nombre} por la {profile.legislatura}</p>
         </div>
       );
     }

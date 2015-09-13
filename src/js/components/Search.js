@@ -14,7 +14,6 @@ var MainActions = require('../actions/MainActions');
 var SearchActions = require('../actions/SearchActions');
 
 var imageURL = require('../../images/yeoman.png');
-var searchCursor = require('../stateTree').select('search');
 
 var Search = React.createClass({
   mixins: [mixin.branch],
@@ -71,7 +70,7 @@ var Search = React.createClass({
 
   _renderLegislators: function() {
     var listItems = [];
-    var items = searchCursor.get('results');
+    var items =this.state.results;
     // console.log(items);
     for (var i = 0; i < items.length; i++) {
       listItems.push(

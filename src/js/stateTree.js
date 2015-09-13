@@ -11,7 +11,7 @@ module.exports = new Baobab({
   },
   information: {
     id: 0,
-    info: {}
+    info: false
   }
 }, {
   shiftReferences: true,

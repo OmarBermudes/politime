@@ -42,15 +42,14 @@ var CivicHackAppWrapper = React.createClass({
   mixins: [mixin.root],
 
   componentDidMount: function() {
-    // var q = '1';
-
-    // request
-    //   .get('http://pokeapi.co/api/v1/pokemon/' + q)
-    //   // .query(q)
-    //   .jsonp()
-    //   .end(function(err, res) {
-    //     var body = res.body;
-    //   });
+     var q = 'jose';
+     request
+       .get('http://192.168.1.89/legisladores/query/?q=' + q)
+       .query(q)
+       .jsonp()
+       .end(function(err, res) {
+         console.log(res);
+       });
   },
 
   childContextTypes: {

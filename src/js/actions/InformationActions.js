@@ -1,10 +1,16 @@
 var informationCursor = require('../stateTree').select('information');
+var request = require('superagent');
+require('superagent-jsonp')(request);
 
 module.exports = {
   getInfoLegislator: function() {
-    // aquí va un request
     var id = informationCursor.get('id');
-    console.log(id)
-    console.log('gola')
+    request
+       .get('http://192.168.1.89/legisladores/legisladorinfo/'+id)
+       .jsonp()
+       .end(function(err,res){
+          informationCursor.set('information',res);
+          console.log(res);
+       });
   }
 };

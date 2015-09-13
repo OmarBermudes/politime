@@ -14,6 +14,7 @@ var MainActions = require('../actions/MainActions');
 var SearchActions = require('../actions/SearchActions');
 
 var imageURL = require('../../images/yeoman.png');
+var searchCursor = require('../stateTree').select('search');
 
 var Search = React.createClass({
   mixins: [mixin.branch],
@@ -24,7 +25,6 @@ var Search = React.createClass({
   },
 
   render: function() {
-    console.log(this.state.query)
     return (
       <div className="search">
         <div className="search__input">
@@ -71,19 +71,20 @@ var Search = React.createClass({
 
   _renderLegislators: function() {
     var listItems = [];
-
-    for (var i = 0; i < 10; i++) {
+    var items = searchCursor.get('results');
+    // console.log(items);
+    for (var i = 0; i < items.length; i++) {
       listItems.push(
         <ListItem 
-          key={i}
-          onClick={this.handleClick.bind(null, i)}
+          key={items[i].id}
+          onClick={this.handleClick.bind(null,items[i].id)}
           primaryText={
             <p>
               <span 
                 style={{
                   fontSize: '15px'}}
                 >
-                  Inbox Me Llamo Sor Juana Inés De La Cruz
+                  {items[i].nombre}
               </span>
             </p>
           }
@@ -95,13 +96,13 @@ var Search = React.createClass({
                   fontSize: '11px'
                 }}
               >
-                Diputada LIX · PRI · Yucatán · Activo
+              {items[i].cargo} · {items[i].partido} · {items[i].entidad}
               </span>
             </p>
           }
           leftAvatar={<Avatar 
             style={{height: '45px', width: '45px'}}
-            src="https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg" 
+            src={items[i].image} 
           />} 
         />
       );

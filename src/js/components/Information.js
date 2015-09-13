@@ -22,6 +22,7 @@ var Information = React.createClass({
   componentDidMount: function() {
     // después de que el componente se montó, lo primero que hárá es el request.
     InformationActions.getInfoLegislator();
+
   },
 
   render: function() {

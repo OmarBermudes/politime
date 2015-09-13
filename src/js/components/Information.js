@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-// var mixin = require('baobab-react/mixins');
+var mixin = require('baobab-react/mixins');
 var Tabs = require('material-ui').Tabs;
 var Tab = require('material-ui').Tab;
 var IconButton = require('material-ui').IconButton;
@@ -10,9 +10,22 @@ var Paper = require('material-ui').Paper;
 var RaisedButton = require('material-ui').RaisedButton;
 
 var MainActions = require('../actions/MainActions');
+var InformationActions = require('../actions/InformationActions');
 
 var Information = React.createClass({
+  mixins: [mixin.branch],
+
+  cursors: {
+    id: ['information', 'id']
+  },
+
+  componentDidMount: function() {
+    // después de que el componente se montó, lo primero que hárá es el request.
+    InformationActions.getInfoLegislator();
+  },
+
   render: function() {
+    console.log(this.state.id);
     return (
       <div className="information">
         <div className="information__header">

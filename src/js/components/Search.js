@@ -11,15 +11,25 @@ var ListDivider = require('material-ui').ListDivider;
 var Avatar = require('material-ui').Avatar;
 
 var MainActions = require('../actions/MainActions');
+var SearchActions = require('../actions/SearchActions');
 
 var imageURL = require('../../images/yeoman.png');
 
 var Search = React.createClass({
+  mixins: [mixin.branch],
+
+  cursors: {
+    query: ['search', 'query'],
+    results: ['search', 'results']
+  },
+
   render: function() {
+    console.log(this.state.query)
     return (
       <div className="search">
         <div className="search__input">
            <TextField 
+            onChange={this.handleChange}
             hintText="Escribe nombre del legislador..." 
             underlineFocusStyle={{borderColor: 'white'}}
             fullWidth={true}
@@ -27,6 +37,7 @@ var Search = React.createClass({
           <IconButton 
             iconClassName="material-icons"
             iconStyle={{color: 'white'}}
+            onClick={this.handleInput}
           >
             send
           </IconButton>
@@ -40,6 +51,24 @@ var Search = React.createClass({
     );
   },
 
+  handleClick: function(id) {
+    SearchActions.getIDLegislator(id);
+    MainActions.changeView('information');
+  },
+
+  handleChange: function(e) {
+    var query = e.target.value.trim();
+
+    e.preventDefault();
+
+    if (query) SearchActions.changeQuery(query);
+
+  },
+
+  handleInput: function() {
+    SearchActions.onInput();
+  },
+
   _renderLegislators: function() {
     var listItems = [];
 
@@ -47,7 +76,7 @@ var Search = React.createClass({
       listItems.push(
         <ListItem 
           key={i}
-          onClick={this.handleClick}
+          onClick={this.handleClick.bind(null, i)}
           primaryText={
             <p>
               <span 
@@ -79,10 +108,6 @@ var Search = React.createClass({
     }
 
     return listItems;
-  },
-
-  handleClick: function() {
-    MainActions.changeView('information');
   }
 });
 
